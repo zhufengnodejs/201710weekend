@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训 www.zhufengpeixun.cn</title>
+</head>
+<body>
+<script>
+    //在客户端里创建一个socket对象　
+    let socket = new WebSocket('ws://localhost:8080');
+    socket.onopen = function(){
+      socket.send('服务器你好');
+    }
+    //注册消息事件，当客户端收到服务器发过来的消息的时候执行回调函数
+    socket.onmessage = function(event){
+      //event.data才是消息
+      console.log(event.data);
+    }
+</script>
+</body>
+</html>
