@@ -30,7 +30,36 @@ let UserModel = conn.model('User',UserSchema);
   console.log(result);
 });*/
 //删除　１参数是删除的条件　２参数是回调函数
-UserModel.remove({username:'zfpx'},function(err,result){
+/*UserModel.remove({username:'zfpx'},function(err,result){
   console.log(err);
   console.log(result.result);
-});
+});*/
+let users = [];
+for(let i=1;i<=10;i++){
+  users.push({username:`zfpx${i}`,age:i});
+}
+/*
+UserModel.create(users,function(err,docs){
+  console.log(docs);
+});*/
+//find查询，第一个参数是查询的条件　第二个参数是回调
+//不管查询结果为１条或多条，返回的都是数组
+/*
+UserModel.find({age:{$gt:5}},function(err,docs){
+  console.log(docs);
+});*/
+//分页查询　
+/**
+ * 每页３条
+ * 查询第２页的数据
+ * 按age字段倒序排列
+ * 排序是用sort 传入一个对象 key就是排序的字段，值就是正序还是倒序 1升序　－１降序
+ * skip跳过的记录数
+ * limit 限制返回的条数
+ * 当调用exec的时候查询请求才真正发出
+ */
+/*let pageSize = 3;
+let pageNum = 2;
+UserModel.find().sort({age:-1}).skip(pageSize*(pageNum-1)).limit(pageSize).exec(function(err,docs){
+  console.log(docs);
+});*/
