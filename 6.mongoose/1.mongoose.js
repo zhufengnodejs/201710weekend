@@ -1,5 +1,6 @@
 //mongoose此模块封装了对mongodb数据库的基本操作
 let mongoose = require('mongoose');
+mongoose.Promise = Promise;
 //1.连接数据库 mongodb://ＩＰ或域名/数据库的名字
 //在mongodb里数据库的名字是可以随便写的,返回连接对象
 let conn = mongoose.createConnection('mongodb://localhost/201710node');
