@@ -2,19 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import $ from 'jquery';
+/**
+ * 1.如何定义和使用复合组件
+ * 2.如何跟后台进行数据交互
+ *  1. fetch 2. axios 3. jquery ajax 4. XMLHttpRequest
+ */
 class Search extends React.Component {
   constructor() {
     super();
+    //wd 是输入框的值  words是一个空数组
     this.state = {wd: '', words: [],index:-1};
   }
 
-  handleChange = (event) => {//解决中文不能输入问题
+  handleChange = (event) => {
     let wd = event.target.value;
+    /**
+     * 1.success成功回调函数
+     * 2.then
+     * 3.done
+     * https://www.baidu.com/su?cb=jQuery32105310044693736287_1512287350132&wd=a&_=1512287350133
+     */
     this.setState({wd},()=>{
       $.ajax({
         type:'GET',
         url:`http://www.baidu.com/su`,
         dataType:'jsonp',//指定响应体的内容类型
+        //http://www.baidu.com/su?cb=xxx
         jsonp:'cb',//指定在后台接收回调方法名的参数名
         data:{wd},//传递数据
         success:(result)=>{
@@ -68,3 +81,7 @@ class Search extends React.Component {
     )
   }
 }
+ReactDOM.render(<Search/>, document.querySelector('#root'));
+//A component is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa).
+//一个组件正在从一个受控组件变成一个非受控组件，输入元素不应该从受控组件切换到非受控组件
+// 因为value等于了undefined
